@@ -36,7 +36,7 @@ public class BLASTQuery implements Serializable {
 		
 		RUNNING; //Legacy queries which were sent had a RUNNING status
 	}
-	
+    
 	private String blastJobID;
 	
 	private String program;
