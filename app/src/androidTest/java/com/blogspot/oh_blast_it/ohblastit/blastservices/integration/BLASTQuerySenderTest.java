@@ -25,32 +25,15 @@ import com.blogspot.oh_blast_it.ohblastit.testhelpers.OhBLASTItTestHelper;
 
 public class BLASTQuerySenderTest extends InstrumentationTestCase {
 
-	private Context context;
+	protected Context context;
 	
 	protected void setUp() throws Exception {
 		context = getInstrumentation().getTargetContext();
 		OhBLASTItTestHelper helper = new OhBLASTItTestHelper(context);
 		helper.cleanDatabase();	
 	}
-	
-	
-	public void testWeCanSendAnNCBIQuery() throws InterruptedException, ExecutionException{
-		BLASTQuery ncbiQuery = validPendingNCBIBLASTQuery();
-		
-		sendToNCBI(context, new BLASTQuery[]{ncbiQuery});					
-		
-		assertSent(ncbiQuery);
-	}
-	
-	public void testWeCanSendAnEBI_EMBLQuery() throws InterruptedException, ExecutionException{
-		BLASTQuery ebiemblQuery = validPendingEMBLBLASTQuery();
-		
-		sendToEBIEMBL(context, new BLASTQuery[]{ebiemblQuery});					
-		
-		assertSent(ebiemblQuery);
-	}
-	
-	private void assertSent(BLASTQuery query){
+
+	protected void assertSent(BLASTQuery query){
 		assertThat("Query was not assigned a job identifier", query.getJobIdentifier(), is(notNullValue()));
 		assertThat("Job identifier was found to be blank", !(query.getJobIdentifier().isEmpty()));
 		assertThat("Query wasn't submitted", query.getStatus(), is(Status.SUBMITTED));
