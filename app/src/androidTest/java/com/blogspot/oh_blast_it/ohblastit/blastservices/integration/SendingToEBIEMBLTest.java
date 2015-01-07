@@ -11,11 +11,15 @@ import static com.blogspot.oh_blast_it.ohblastit.testhelpers.SendBLASTQuery.send
  * Created by hemal on 07/01/15.
  */
 public class SendingToEBIEMBLTest extends BLASTQuerySenderTest {
+
+    public void setUp() throws Exception {
+        super.setUp();
+        query = validPendingEMBLBLASTQuery();
+    }
+
     public void testWeCanSendABLASTQuery() throws InterruptedException, ExecutionException {
-        BLASTQuery ebiemblQuery = validPendingEMBLBLASTQuery();
+        sendToEBIEMBL(context, new BLASTQuery[]{query});
 
-        sendToEBIEMBL(context, new BLASTQuery[]{ebiemblQuery});
-
-        assertSent(ebiemblQuery);
+        assertSent(query);
     }
 }

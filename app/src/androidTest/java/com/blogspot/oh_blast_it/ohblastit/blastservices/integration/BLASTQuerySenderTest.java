@@ -23,15 +23,18 @@ import com.blogspot.oh_blast_it.ohblastit.testhelpers.OhBLASTItTestHelper;
  *
  */
 
-public class BLASTQuerySenderTest extends InstrumentationTestCase {
+public abstract class BLASTQuerySenderTest extends InstrumentationTestCase {
 
 	protected Context context;
+    protected BLASTQuery query;
 	
 	protected void setUp() throws Exception {
 		context = getInstrumentation().getTargetContext();
 		OhBLASTItTestHelper helper = new OhBLASTItTestHelper(context);
 		helper.cleanDatabase();	
 	}
+
+    public abstract void testWeCanSendABLASTQuery() throws InterruptedException, ExecutionException;
 
 	protected void assertSent(BLASTQuery query){
 		assertThat("Query was not assigned a job identifier", query.getJobIdentifier(), is(notNullValue()));
