@@ -11,7 +11,7 @@ import android.test.InstrumentationTestCase;
 import com.blogspot.oh_blast_it.ohblastit.domain.SearchParameter;
 import com.blogspot.oh_blast_it.ohblastit.testhelpers.OhBLASTItTestHelper;
 
-public class SearchParameterControllerTest extends InstrumentationTestCase {
+public class SearchParameterControllerTest extends PersistenceTestCase {
 
 	private SearchParameterController searchParameterController;
 	
@@ -21,8 +21,6 @@ public class SearchParameterControllerTest extends InstrumentationTestCase {
 	
 	protected void setUp() throws Exception {
 		super.setUp();
-		OhBLASTItTestHelper helper = new OhBLASTItTestHelper(getInstrumentation().getTargetContext());
-		helper.cleanDatabase();
 		searchParameterController = new SearchParameterController(getInstrumentation().getTargetContext());
 		parameter = aSearchParameter();
 		saveFor(blastQueryId, parameter);
