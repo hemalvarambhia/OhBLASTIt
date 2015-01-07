@@ -17,12 +17,6 @@ public class SendingToEBIEMBLTest extends BLASTQuerySenderTest {
         query = validPendingEMBLBLASTQuery();
     }
 
-    public void testWeCanSendABLASTQuery() throws InterruptedException, ExecutionException {
-        send();
-
-        assertSent(query);
-    }
-
     protected void send() throws InterruptedException, ExecutionException {
         sendToEBIEMBL(context, new BLASTQuery[]{query});
     }
