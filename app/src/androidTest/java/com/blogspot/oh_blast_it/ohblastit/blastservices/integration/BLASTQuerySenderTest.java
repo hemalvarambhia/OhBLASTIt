@@ -1,7 +1,5 @@
 package com.blogspot.oh_blast_it.ohblastit.blastservices.integration;
 
-import static com.blogspot.oh_blast_it.ohblastit.testhelpers.SendBLASTQuery.*;
-import static com.blogspot.oh_blast_it.ohblastit.testhelpers.BLASTQueryBuilder.*;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
