@@ -34,7 +34,6 @@ public abstract class BLASTQuerySenderTest extends InstrumentationTestCase {
 		helper.cleanDatabase();	
 	}
 
-
     public void testWeCanSendABLASTQuery() throws InterruptedException, ExecutionException {
         send();
 
