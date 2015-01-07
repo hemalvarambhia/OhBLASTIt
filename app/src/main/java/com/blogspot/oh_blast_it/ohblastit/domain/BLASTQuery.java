@@ -30,11 +30,11 @@ public class BLASTQuery implements Serializable {
 	 * exp_threshold = 10
 	 */
 	public static final String BLAST_SEARCH_PARAMS_TABLE = "BLASTsearch_params";
-	
-	public enum Status {
-		DRAFT, PENDING, SUBMITTED, UNSURE, FINISHED, ERROR, NOT_FOUND, RUNNING
-	}
-    
+
+    public enum Status {
+        DRAFT, PENDING, SUBMITTED, UNSURE, FINISHED, ERROR, NOT_FOUND, RUNNING
+    }
+
 	private String blastJobID;
 	
 	private String program;
