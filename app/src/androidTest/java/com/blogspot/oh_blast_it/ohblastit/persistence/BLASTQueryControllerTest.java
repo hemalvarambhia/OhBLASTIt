@@ -14,14 +14,12 @@ import com.blogspot.oh_blast_it.ohblastit.domain.BLASTQuery;
 import com.blogspot.oh_blast_it.ohblastit.domain.BLASTQuery.Status;
 import com.blogspot.oh_blast_it.ohblastit.testhelpers.OhBLASTItTestHelper;
 
-public class BLASTQueryControllerTest extends InstrumentationTestCase {
+public class BLASTQueryControllerTest extends PersistenceTestCase {
 
 	private BLASTQueryController controller;
 	
 	protected void setUp() throws Exception {
 		super.setUp();
-		OhBLASTItTestHelper helper = new OhBLASTItTestHelper(getInstrumentation().getTargetContext());
-		helper.cleanDatabase();
 		controller = new BLASTQueryController(getInstrumentation().getTargetContext());
 	}
 	
