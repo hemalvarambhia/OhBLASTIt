@@ -17,12 +17,6 @@ public class SendingToNCBITest extends BLASTQuerySenderTest {
         query = validPendingNCBIBLASTQuery();
     }
 
-    public void testWeCanSendABLASTQuery() throws InterruptedException, ExecutionException {
-        send();
-
-        assertSent(query);
-    }
-
     protected void send() throws InterruptedException, ExecutionException {
         sendToNCBI(context, new BLASTQuery[]{query});
     }
