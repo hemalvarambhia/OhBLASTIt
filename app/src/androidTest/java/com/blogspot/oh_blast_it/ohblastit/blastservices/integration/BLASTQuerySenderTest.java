@@ -37,12 +37,12 @@ public abstract class BLASTQuerySenderTest extends InstrumentationTestCase {
     public void testWeCanSendABLASTQuery() throws InterruptedException, ExecutionException {
         send();
 
-        assertSent(query);
+        assertSent();
     }
 
     protected abstract void send() throws InterruptedException, ExecutionException;
 
-	protected void assertSent(BLASTQuery query){
+	protected void assertSent(){
 		assertThat("Query was not assigned a job identifier", query.getJobIdentifier(), is(notNullValue()));
 		assertThat("Job identifier was found to be blank", !(query.getJobIdentifier().isEmpty()));
 		assertThat("Query wasn't submitted", query.getStatus(), is(Status.SUBMITTED));
