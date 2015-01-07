@@ -18,8 +18,12 @@ public class SendingToEBIEMBLTest extends BLASTQuerySenderTest {
     }
 
     public void testWeCanSendABLASTQuery() throws InterruptedException, ExecutionException {
-        sendToEBIEMBL(context, new BLASTQuery[]{query});
+        send();
 
         assertSent(query);
+    }
+
+    protected void send() throws InterruptedException, ExecutionException {
+        sendToEBIEMBL(context, new BLASTQuery[]{query});
     }
 }

@@ -12,12 +12,19 @@ import static com.blogspot.oh_blast_it.ohblastit.testhelpers.SendBLASTQuery.send
  */
 public class SendingToNCBITest extends BLASTQuerySenderTest {
 
+    public void setUp() throws Exception {
+        super.setUp();
+        query = validPendingNCBIBLASTQuery();
+    }
+
     public void testWeCanSendABLASTQuery() throws InterruptedException, ExecutionException {
-        BLASTQuery ncbiQuery = validPendingNCBIBLASTQuery();
+        send();
 
-        sendToNCBI(context, new BLASTQuery[]{ncbiQuery});
+        assertSent(query);
+    }
 
-        assertSent(ncbiQuery);
+    protected void send() throws InterruptedException, ExecutionException {
+        sendToNCBI(context, new BLASTQuery[]{query});
     }
 
 }
