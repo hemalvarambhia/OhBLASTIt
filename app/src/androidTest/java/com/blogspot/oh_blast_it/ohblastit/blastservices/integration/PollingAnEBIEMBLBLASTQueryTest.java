@@ -22,7 +22,7 @@ import static com.blogspot.oh_blast_it.ohblastit.testhelpers.BLASTQueryBuilder.*
 /**
  * Created by hemalvarambhia on 12/07/15.
  */
-public class PollingAnEBIEMBLBLASTQueryTest extends InstrumentationTestCase {
+public class PollingAnEBIEMBLBLASTQueryTest extends PollingABLASTQueryTest {
     protected Context context;
     protected BLASTQuery query;
 
@@ -41,7 +41,7 @@ public class PollingAnEBIEMBLBLASTQueryTest extends InstrumentationTestCase {
         assertValid(status);
     }
 
-    private void sendBLASTQuery() throws ExecutionException, InterruptedException {
+    protected void sendBLASTQuery() throws ExecutionException, InterruptedException {
         SendBLASTQuery.sendToEBIEMBL(context, new BLASTQuery[]{query});
     }
 
@@ -53,7 +53,7 @@ public class PollingAnEBIEMBLBLASTQueryTest extends InstrumentationTestCase {
         return status;
     }
 
-    private void assertValid(SearchStatus status) {
+    protected void assertValid(SearchStatus status) {
         List<SearchStatus> validOutcomes = Arrays.asList(SearchStatus.values());
         boolean isValidStatus = validOutcomes.contains(status);
         String message = String.format(

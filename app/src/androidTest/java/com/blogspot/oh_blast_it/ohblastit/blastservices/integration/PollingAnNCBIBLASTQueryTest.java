@@ -3,6 +3,7 @@ package com.blogspot.oh_blast_it.ohblastit.blastservices.integration;
 import android.content.Context;
 import android.test.InstrumentationTestCase;
 
+import com.blogspot.oh_blast_it.ohblastit.blastservices.BLASTSearchEngine;
 import com.blogspot.oh_blast_it.ohblastit.blastservices.NCBIBLASTService;
 import com.blogspot.oh_blast_it.ohblastit.blastservices.SearchStatus;
 import com.blogspot.oh_blast_it.ohblastit.domain.BLASTQuery;
@@ -22,11 +23,11 @@ import static com.blogspot.oh_blast_it.ohblastit.testhelpers.BLASTQueryBuilder.v
 /**
  * Created by hemalvarambhia on 12/07/15.
  */
-public class PollingAnNCBIBLASTQueryTest extends InstrumentationTestCase {
+public class PollingAnNCBIBLASTQueryTest extends PollingABLASTQueryTest {
     protected Context context;
     protected BLASTQuery query;
 
-	protected void setUp() throws Exception {
+    protected void setUp() throws Exception {
 		context = getInstrumentation().getTargetContext();
 		OhBLASTItTestHelper helper = new OhBLASTItTestHelper(context);
 		helper.cleanDatabase();
@@ -41,19 +42,19 @@ public class PollingAnNCBIBLASTQueryTest extends InstrumentationTestCase {
         assertValid(status);
     }
 
-    private void sendBLASTQuery() throws ExecutionException, InterruptedException {
+    protected void sendBLASTQuery() throws ExecutionException, InterruptedException {
         SendBLASTQuery.sendToNCBI(context, new BLASTQuery[]{query});
     }
 
     protected SearchStatus poll() throws ExecutionException, InterruptedException {
-        NCBIBLASTService service = new NCBIBLASTService();
+        BLASTSearchEngine service = new NCBIBLASTService();
         SearchStatus status = service.pollQuery(query.getJobIdentifier());
         service.close();
 
         return status;
     }
 
-    private void assertValid(SearchStatus status) {
+    protected void assertValid(SearchStatus status) {
         List<SearchStatus> validOutcomes = Arrays.asList(SearchStatus.values());
         boolean isValidStatus = validOutcomes.contains(status);
         String message = String.format(
