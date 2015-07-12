@@ -34,14 +34,6 @@ public class PollingAnNCBIBLASTQueryTest extends PollingABLASTQueryTest {
         query = validPendingNCBIBLASTQuery();
 	}
 
-    public void testWeCanPollABLASTQueryForItsCurrentStatus() throws ExecutionException, InterruptedException {
-        sendBLASTQuery();
-
-        SearchStatus status = poll();
-
-        assertValid(status);
-    }
-
     protected void sendBLASTQuery() throws ExecutionException, InterruptedException {
         SendBLASTQuery.sendToNCBI(context, new BLASTQuery[]{query});
     }
@@ -52,13 +44,5 @@ public class PollingAnNCBIBLASTQueryTest extends PollingABLASTQueryTest {
         service.close();
 
         return status;
-    }
-
-    protected void assertValid(SearchStatus status) {
-        List<SearchStatus> validOutcomes = Arrays.asList(SearchStatus.values());
-        boolean isValidStatus = validOutcomes.contains(status);
-        String message = String.format(
-                "Expected one of %s but got %s", validOutcomes.toString(), status.toString());
-        Assert.assertTrue(message, isValidStatus);
     }
 }

@@ -22,7 +22,7 @@ import static com.blogspot.oh_blast_it.ohblastit.testhelpers.BLASTQueryBuilder.*
 /**
  * Created by hemalvarambhia on 12/07/15.
  */
-public class PollingAnEBIEMBLBLASTQueryTest extends InstrumentationTestCase {
+public class PollingAnEBIEMBLBLASTQueryTest extends PollingABLASTQueryTest {
     protected Context context;
     protected BLASTQuery query;
 
@@ -31,14 +31,6 @@ public class PollingAnEBIEMBLBLASTQueryTest extends InstrumentationTestCase {
         OhBLASTItTestHelper helper = new OhBLASTItTestHelper(context);
         helper.cleanDatabase();
         query = validPendingEMBLBLASTQuery();
-    }
-
-    public void testWeCanPollABLASTQueryForItsCurrentStatus() throws ExecutionException, InterruptedException {
-        sendBLASTQuery();
-
-        SearchStatus status = poll();
-
-        assertValid(status);
     }
 
     protected void sendBLASTQuery() throws ExecutionException, InterruptedException {
@@ -51,13 +43,5 @@ public class PollingAnEBIEMBLBLASTQueryTest extends InstrumentationTestCase {
         service.close();
 
         return status;
-    }
-
-    protected void assertValid(SearchStatus status) {
-        List<SearchStatus> validOutcomes = Arrays.asList(SearchStatus.values());
-        boolean isValidStatus = validOutcomes.contains(status);
-        String message = String.format(
-                "Expected one of %s but got %s", validOutcomes.toString(), status.toString());
-        Assert.assertTrue(message, isValidStatus);
     }
 }
