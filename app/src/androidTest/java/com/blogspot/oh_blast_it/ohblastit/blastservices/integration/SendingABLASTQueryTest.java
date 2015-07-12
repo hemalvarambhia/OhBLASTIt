@@ -15,7 +15,7 @@ import com.blogspot.oh_blast_it.ohblastit.testhelpers.OhBLASTItTestHelper;
 
 /**
  * Here we will set the status of the queries to <code>PENDING</code>
- * as the BLAST query sender will send pending query provided from 
+ * as the BLAST query sender will sendBLASTQuery pending query provided from
  * elsewhere
  * @author Hemal N Varambhia
  *
@@ -33,16 +33,19 @@ public abstract class SendingABLASTQueryTest extends InstrumentationTestCase {
 	}
 
     public void testWeCanSendABLASTQuery() throws InterruptedException, ExecutionException {
-        send();
+        sendBLASTQuery();
 
         assertSent();
     }
 
-    protected abstract void send() throws InterruptedException, ExecutionException;
+    protected abstract void sendBLASTQuery() throws InterruptedException, ExecutionException;
 
-	protected void assertSent(){
+	protected void assertSent() {
 		assertThat("Query was not assigned a job identifier", query.getJobIdentifier(), is(notNullValue()));
 		assertThat("Job identifier was found to be blank", !(query.getJobIdentifier().isEmpty()));
 		assertThat("Query wasn't submitted", query.getStatus(), is(Status.SUBMITTED));
+		assertValidIdentifier();
 	}
+
+	protected abstract void assertValidIdentifier();
 }

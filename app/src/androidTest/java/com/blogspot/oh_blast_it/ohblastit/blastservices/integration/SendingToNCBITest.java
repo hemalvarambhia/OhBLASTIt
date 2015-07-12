@@ -17,8 +17,17 @@ public class SendingToNCBITest extends SendingABLASTQueryTest {
         query = validPendingNCBIBLASTQuery();
     }
 
-    protected void send() throws InterruptedException, ExecutionException {
+    protected void sendBLASTQuery() throws InterruptedException, ExecutionException {
         sendToNCBI(context, new BLASTQuery[]{query});
+    }
+
+    protected void assertValidIdentifier(){
+        String requestIdRegexPattern = "[A-Z0-9]{11}";
+        boolean validRequestId = query.getJobIdentifier().matches(requestIdRegexPattern);
+        String message = String.format(
+                "%s is not a valid job identifier. It should take the form %s",
+                query.getJobIdentifier(), requestIdRegexPattern);
+        assertTrue(message, validRequestId);
     }
 
 }
