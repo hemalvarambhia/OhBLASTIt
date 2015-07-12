@@ -21,7 +21,7 @@ import com.blogspot.oh_blast_it.ohblastit.testhelpers.OhBLASTItTestHelper;
  *
  */
 
-public abstract class BLASTQuerySenderTest extends InstrumentationTestCase {
+public abstract class SendingABLASTQueryTest extends InstrumentationTestCase {
 
 	protected Context context;
     protected BLASTQuery query;

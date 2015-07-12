@@ -10,7 +10,7 @@ import static com.blogspot.oh_blast_it.ohblastit.testhelpers.SendBLASTQuery.send
 /**
  * Created by hemal on 07/01/15.
  */
-public class SendingToNCBITest extends BLASTQuerySenderTest {
+public class SendingToNCBITest extends SendingABLASTQueryTest {
 
     public void setUp() throws Exception {
         super.setUp();
