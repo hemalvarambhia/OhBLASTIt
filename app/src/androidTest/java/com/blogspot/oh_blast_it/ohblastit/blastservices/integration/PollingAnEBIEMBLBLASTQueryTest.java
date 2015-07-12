@@ -22,7 +22,7 @@ import static com.blogspot.oh_blast_it.ohblastit.testhelpers.BLASTQueryBuilder.*
 /**
  * Created by hemalvarambhia on 12/07/15.
  */
-public class PollingAnEBIEMBLBLASTQueryTest extends PollingABLASTQueryTest {
+public class PollingAnEBIEMBLBLASTQueryTest extends InstrumentationTestCase {
     protected Context context;
     protected BLASTQuery query;
 
