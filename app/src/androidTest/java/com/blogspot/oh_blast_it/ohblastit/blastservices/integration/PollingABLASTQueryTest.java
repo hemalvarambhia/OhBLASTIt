@@ -1,8 +1,11 @@
 package com.blogspot.oh_blast_it.ohblastit.blastservices.integration;
 
+import android.content.Context;
 import android.test.InstrumentationTestCase;
 
 import com.blogspot.oh_blast_it.ohblastit.blastservices.SearchStatus;
+import com.blogspot.oh_blast_it.ohblastit.domain.BLASTQuery;
+import com.blogspot.oh_blast_it.ohblastit.testhelpers.OhBLASTItTestHelper;
 
 import junit.framework.Assert;
 
@@ -14,6 +17,15 @@ import java.util.concurrent.ExecutionException;
  * Created by hemalvarambhia on 12/07/15.
  */
 public abstract class PollingABLASTQueryTest extends InstrumentationTestCase {
+    protected Context context;
+    protected BLASTQuery query;
+
+    protected void setUp() throws Exception {
+        context = getInstrumentation().getTargetContext();
+        OhBLASTItTestHelper helper = new OhBLASTItTestHelper(context);
+        helper.cleanDatabase();
+    }
+
     public void testWeCanPollABLASTQueryForItsCurrentStatus() throws ExecutionException, InterruptedException {
         sendBLASTQuery();
 

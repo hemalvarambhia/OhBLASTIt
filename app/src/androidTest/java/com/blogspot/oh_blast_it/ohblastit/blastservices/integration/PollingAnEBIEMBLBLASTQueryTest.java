@@ -23,13 +23,8 @@ import static com.blogspot.oh_blast_it.ohblastit.testhelpers.BLASTQueryBuilder.*
  * Created by hemalvarambhia on 12/07/15.
  */
 public class PollingAnEBIEMBLBLASTQueryTest extends PollingABLASTQueryTest {
-    protected Context context;
-    protected BLASTQuery query;
-
     protected void setUp() throws Exception {
-        context = getInstrumentation().getTargetContext();
-        OhBLASTItTestHelper helper = new OhBLASTItTestHelper(context);
-        helper.cleanDatabase();
+        super.setUp();
         query = validPendingEMBLBLASTQuery();
     }
 
