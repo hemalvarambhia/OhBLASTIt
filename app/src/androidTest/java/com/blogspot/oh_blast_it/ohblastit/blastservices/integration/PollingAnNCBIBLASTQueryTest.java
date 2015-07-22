@@ -20,9 +20,6 @@ import java.util.concurrent.ExecutionException;
 
 import static com.blogspot.oh_blast_it.ohblastit.testhelpers.BLASTQueryBuilder.validPendingNCBIBLASTQuery;
 
-/**
- * Created by hemalvarambhia on 12/07/15.
- */
 public class PollingAnNCBIBLASTQueryTest extends PollingABLASTQueryTest {
     protected void setUp() throws Exception {
 		super.setUp();

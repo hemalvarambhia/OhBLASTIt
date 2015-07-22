@@ -7,9 +7,6 @@ import java.util.concurrent.ExecutionException;
 import static com.blogspot.oh_blast_it.ohblastit.testhelpers.BLASTQueryBuilder.validPendingNCBIBLASTQuery;
 import static com.blogspot.oh_blast_it.ohblastit.testhelpers.SendBLASTQuery.sendToNCBI;
 
-/**
- * Created by hemal on 07/01/15.
- */
 public class SendingToNCBITest extends SendingABLASTQueryTest {
 
     public void setUp() throws Exception {

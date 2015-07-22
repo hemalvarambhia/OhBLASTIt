@@ -13,9 +13,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-/**
- * Created by hemalvarambhia on 12/07/15.
- */
 public abstract class PollingABLASTQueryTest extends InstrumentationTestCase {
     protected Context context;
     protected BLASTQuery query;

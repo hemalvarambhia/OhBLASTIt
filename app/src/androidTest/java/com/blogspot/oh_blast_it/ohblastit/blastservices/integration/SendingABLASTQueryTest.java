@@ -13,14 +13,6 @@ import com.blogspot.oh_blast_it.ohblastit.domain.BLASTQuery;
 import com.blogspot.oh_blast_it.ohblastit.domain.BLASTQuery.Status;
 import com.blogspot.oh_blast_it.ohblastit.testhelpers.OhBLASTItTestHelper;
 
-/**
- * Here we will set the status of the queries to <code>PENDING</code>
- * as the BLAST query sender will sendBLASTQuery pending query provided from
- * elsewhere
- * @author Hemal N Varambhia
- *
- */
-
 public abstract class SendingABLASTQueryTest extends InstrumentationTestCase {
 
 	protected Context context;
