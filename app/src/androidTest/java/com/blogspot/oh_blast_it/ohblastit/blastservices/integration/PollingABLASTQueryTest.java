@@ -34,6 +34,14 @@ public abstract class PollingABLASTQueryTest extends InstrumentationTestCase {
         assertValid(status);
     }
 
+    public void testWeGetNotFoundForANonExistentBlastQuery() throws ExecutionException, InterruptedException{
+        query.setJobIdentifier("NON_EXISTENT123");
+
+        SearchStatus status = poll();
+
+        assertEquals(SearchStatus.NOT_FOUND, status);
+    }
+
     protected abstract void sendBLASTQuery() throws ExecutionException, InterruptedException;
 
     protected abstract SearchStatus poll() throws ExecutionException, InterruptedException;
