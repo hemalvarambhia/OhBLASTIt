@@ -9,9 +9,6 @@ import java.util.concurrent.ExecutionException;
 import static com.blogspot.oh_blast_it.ohblastit.testhelpers.BLASTQueryBuilder.validPendingEMBLBLASTQuery;
 import static com.blogspot.oh_blast_it.ohblastit.testhelpers.SendBLASTQuery.sendToEBIEMBL;
 
-/**
- * Created by hemal on 07/01/15.
- */
 public class SendingToEBIEMBLTest extends SendingABLASTQueryTest {
 
     public void setUp() throws Exception {
