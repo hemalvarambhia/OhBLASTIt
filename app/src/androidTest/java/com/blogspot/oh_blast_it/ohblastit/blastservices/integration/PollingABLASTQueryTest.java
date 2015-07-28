@@ -3,6 +3,7 @@ package com.blogspot.oh_blast_it.ohblastit.blastservices.integration;
 import android.content.Context;
 import android.test.InstrumentationTestCase;
 
+import com.blogspot.oh_blast_it.ohblastit.blastservices.BLASTSearchEngine;
 import com.blogspot.oh_blast_it.ohblastit.blastservices.SearchStatus;
 import com.blogspot.oh_blast_it.ohblastit.domain.BLASTQuery;
 import com.blogspot.oh_blast_it.ohblastit.testhelpers.OhBLASTItTestHelper;
@@ -16,6 +17,7 @@ import java.util.concurrent.ExecutionException;
 public abstract class PollingABLASTQueryTest extends InstrumentationTestCase {
     protected Context context;
     protected BLASTQuery query;
+    protected BLASTSearchEngine service;
 
     protected void setUp() throws Exception {
         context = getInstrumentation().getTargetContext();
@@ -39,9 +41,15 @@ public abstract class PollingABLASTQueryTest extends InstrumentationTestCase {
         assertEquals(SearchStatus.NOT_FOUND, status);
     }
 
-    protected abstract void sendBLASTQuery() throws ExecutionException, InterruptedException;
+    protected void sendBLASTQuery() throws ExecutionException, InterruptedException {
+        String identifier = service.submit(query);
+        query.setJobIdentifier(identifier);
+    }
 
-    protected abstract SearchStatus poll() throws ExecutionException, InterruptedException;
+    protected SearchStatus poll() throws ExecutionException, InterruptedException {
+        SearchStatus status = service.pollQuery(query.getJobIdentifier());
+        return status;
+    }
 
     protected void assertValid(SearchStatus status) {
         List<SearchStatus> validOutcomes = Arrays.asList(SearchStatus.values());
@@ -49,5 +57,10 @@ public abstract class PollingABLASTQueryTest extends InstrumentationTestCase {
         String message = String.format(
                 "Expected one of %s but got %s", validOutcomes.toString(), status.toString());
         Assert.assertTrue(message, isValidStatus);
+    }
+
+    protected void tearDown() throws Exception {
+        super.tearDown();
+        service.close();
     }
 }

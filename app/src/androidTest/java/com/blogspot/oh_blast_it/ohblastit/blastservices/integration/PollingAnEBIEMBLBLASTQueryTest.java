@@ -14,20 +14,10 @@ import java.util.concurrent.ExecutionException;
 import static com.blogspot.oh_blast_it.ohblastit.testhelpers.BLASTQueryBuilder.*;
 
 public class PollingAnEBIEMBLBLASTQueryTest extends PollingABLASTQueryTest {
+
     protected void setUp() throws Exception {
         super.setUp();
         query = validPendingEMBLBLASTQuery();
-    }
-
-    protected void sendBLASTQuery() throws ExecutionException, InterruptedException {
-        SendBLASTQuery.sendToEBIEMBL(context, new BLASTQuery[]{query});
-    }
-
-    protected SearchStatus poll() throws ExecutionException, InterruptedException {
-        BLASTSearchEngine service = new EMBLEBIBLASTService();
-        SearchStatus status = service.pollQuery(query.getJobIdentifier());
-        service.close();
-
-        return status;
+        service = new EMBLEBIBLASTService();
     }
 }

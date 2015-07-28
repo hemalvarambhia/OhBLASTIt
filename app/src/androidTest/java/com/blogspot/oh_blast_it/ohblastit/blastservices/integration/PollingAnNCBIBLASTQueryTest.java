@@ -17,17 +17,6 @@ public class PollingAnNCBIBLASTQueryTest extends PollingABLASTQueryTest {
     protected void setUp() throws Exception {
 		super.setUp();
         query = validPendingNCBIBLASTQuery();
+        service = new NCBIBLASTService();
 	}
-
-    protected void sendBLASTQuery() throws ExecutionException, InterruptedException {
-        SendBLASTQuery.sendToNCBI(context, new BLASTQuery[]{query});
-    }
-
-    protected SearchStatus poll() throws ExecutionException, InterruptedException {
-        BLASTSearchEngine service = new NCBIBLASTService();
-        SearchStatus status = service.pollQuery(query.getJobIdentifier());
-        service.close();
-
-        return status;
-    }
 }
