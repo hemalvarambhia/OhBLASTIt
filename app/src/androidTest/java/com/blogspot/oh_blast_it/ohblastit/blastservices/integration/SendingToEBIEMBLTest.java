@@ -1,23 +1,17 @@
 package com.blogspot.oh_blast_it.ohblastit.blastservices.integration;
 
-import com.blogspot.oh_blast_it.ohblastit.domain.BLASTQuery;
+import com.blogspot.oh_blast_it.ohblastit.blastservices.EMBLEBIBLASTService;
 
 import junit.framework.Assert;
 
-import java.util.concurrent.ExecutionException;
-
 import static com.blogspot.oh_blast_it.ohblastit.testhelpers.BLASTQueryBuilder.validPendingEMBLBLASTQuery;
-import static com.blogspot.oh_blast_it.ohblastit.testhelpers.SendBLASTQuery.sendToEBIEMBL;
 
 public class SendingToEBIEMBLTest extends SendingABLASTQueryTest {
 
     public void setUp() throws Exception {
         super.setUp();
         query = validPendingEMBLBLASTQuery();
-    }
-
-    protected void sendBLASTQuery() throws InterruptedException, ExecutionException {
-        sendToEBIEMBL(context, new BLASTQuery[]{query});
+        service = new EMBLEBIBLASTService();
     }
 
     protected void assertValidIdentifier() {
@@ -29,4 +23,5 @@ public class SendingToEBIEMBLTest extends SendingABLASTQueryTest {
                 query.getJobIdentifier(), jobIdRegex);
         Assert.assertTrue(message, validId);
     }
+
 }

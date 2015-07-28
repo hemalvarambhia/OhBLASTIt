@@ -1,21 +1,15 @@
 package com.blogspot.oh_blast_it.ohblastit.blastservices.integration;
 
-import com.blogspot.oh_blast_it.ohblastit.domain.BLASTQuery;
-
-import java.util.concurrent.ExecutionException;
+import com.blogspot.oh_blast_it.ohblastit.blastservices.NCBIBLASTService;
 
 import static com.blogspot.oh_blast_it.ohblastit.testhelpers.BLASTQueryBuilder.validPendingNCBIBLASTQuery;
-import static com.blogspot.oh_blast_it.ohblastit.testhelpers.SendBLASTQuery.sendToNCBI;
 
 public class SendingToNCBITest extends SendingABLASTQueryTest {
 
     public void setUp() throws Exception {
         super.setUp();
         query = validPendingNCBIBLASTQuery();
-    }
-
-    protected void sendBLASTQuery() throws InterruptedException, ExecutionException {
-        sendToNCBI(context, new BLASTQuery[]{query});
+        service = new NCBIBLASTService();
     }
 
     protected void assertValidIdentifier(){

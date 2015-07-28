@@ -9,6 +9,7 @@ import java.util.concurrent.ExecutionException;
 import android.content.Context;
 import android.test.InstrumentationTestCase;
 
+import com.blogspot.oh_blast_it.ohblastit.blastservices.BLASTSearchEngine;
 import com.blogspot.oh_blast_it.ohblastit.domain.BLASTQuery;
 import com.blogspot.oh_blast_it.ohblastit.domain.BLASTQuery.Status;
 import com.blogspot.oh_blast_it.ohblastit.testhelpers.OhBLASTItTestHelper;
@@ -17,7 +18,8 @@ public abstract class SendingABLASTQueryTest extends InstrumentationTestCase {
 
 	protected Context context;
     protected BLASTQuery query;
-	
+	protected BLASTSearchEngine service;
+
 	protected void setUp() throws Exception {
 		context = getInstrumentation().getTargetContext();
 		OhBLASTItTestHelper helper = new OhBLASTItTestHelper(context);
@@ -30,14 +32,21 @@ public abstract class SendingABLASTQueryTest extends InstrumentationTestCase {
         assertSent();
     }
 
-    protected abstract void sendBLASTQuery() throws InterruptedException, ExecutionException;
+	protected void sendBLASTQuery() throws InterruptedException, ExecutionException {
+        String identifier = service.submit(query);
+        query.setJobIdentifier(identifier);
+    }
 
 	protected void assertSent() {
 		assertThat("Query was not assigned a job identifier", query.getJobIdentifier(), is(notNullValue()));
 		assertThat("Job identifier was found to be blank", !(query.getJobIdentifier().isEmpty()));
-		assertThat("Query wasn't submitted", query.getStatus(), is(Status.SUBMITTED));
 		assertValidIdentifier();
 	}
 
 	protected abstract void assertValidIdentifier();
+
+	protected void tearDown() throws Exception {
+        super.tearDown();
+        service.close();
+    }
 }
